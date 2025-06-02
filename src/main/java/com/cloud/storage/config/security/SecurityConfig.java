@@ -40,7 +40,9 @@ public class SecurityConfig {
                 )
                 .userDetailsService(personDetailsService)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs*/**").permitAll()
+                        .requestMatchers( "/api/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )

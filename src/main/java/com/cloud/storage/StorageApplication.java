@@ -9,8 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties(MinioConfigProperties.class)
 public class StorageApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StorageApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StorageApplication.class, args);
+    }
 
 }
