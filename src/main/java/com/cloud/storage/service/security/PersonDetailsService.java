@@ -1,8 +1,8 @@
-package com.cloud.storage.services.security;
+package com.cloud.storage.service.security;
 
 import com.cloud.storage.config.security.PersonDetails;
-import com.cloud.storage.models.Person;
-import com.cloud.storage.repositories.PersonRepository;
+import com.cloud.storage.model.Person;
+import com.cloud.storage.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,9 +1,9 @@
-package com.cloud.storage.services.person;
+package com.cloud.storage.service.person;
 
 import com.cloud.storage.dto.person.PersonRequest;
 import com.cloud.storage.dto.person.PersonResponse;
-import com.cloud.storage.models.Person;
-import com.cloud.storage.repositories.PersonRepository;
+import com.cloud.storage.model.Person;
+import com.cloud.storage.repository.PersonRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class RegistrationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthService authService;
 
-    public ResponseEntity<PersonResponse> registration(PersonRequest person, HttpServletRequest request) {
+    public ResponseEntity<?> registration(PersonRequest person, HttpServletRequest request) {
         if (personRepository.existsByUsername(person.username())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new PersonResponse("Person is already exist"));

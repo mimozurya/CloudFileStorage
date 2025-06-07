@@ -1,9 +1,20 @@
 version: '3.9'
 services:
+  backend:
+    build:
+      dockerfile: ./Dockerfile
+    hostname: storage
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+      - minio
+      - redis
   db:
     image: postgres:17.5
     container_name: app-postgres
-    restart: always
+    restart: unless-stopped
     shm_size: 128mb
     ports:
       - '5432:5432'

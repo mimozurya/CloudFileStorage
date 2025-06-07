@@ -1,6 +1,6 @@
 package com.cloud.storage.config.security;
 
-import com.cloud.storage.models.Person;
+import com.cloud.storage.model.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

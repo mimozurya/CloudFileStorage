@@ -1,6 +1,6 @@
-package com.cloud.storage.repositories;
+package com.cloud.storage.repository;
 
-import com.cloud.storage.models.Person;
+import com.cloud.storage.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

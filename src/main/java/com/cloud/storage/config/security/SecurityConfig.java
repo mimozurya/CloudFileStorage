@@ -1,10 +1,9 @@
 package com.cloud.storage.config.security;
 
-import com.cloud.storage.services.security.PersonDetailsService;
+import com.cloud.storage.service.security.PersonDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,17 +32,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                         .sessionFixation().migrateSession()
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false)
                 )
                 .userDetailsService(personDetailsService)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/api-docs*/**").permitAll()
-                        .requestMatchers( "/api/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers( "/api/**").authenticated()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs*/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .build();
@@ -70,7 +66,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Set-Cookie"));
         configuration.setAllowCredentials(true);

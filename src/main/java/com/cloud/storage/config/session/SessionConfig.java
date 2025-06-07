@@ -1,4 +1,4 @@
-package com.cloud.storage.config;
+package com.cloud.storage.config.session;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;

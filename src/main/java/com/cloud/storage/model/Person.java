@@ -1,4 +1,4 @@
-package com.cloud.storage.models;
+package com.cloud.storage.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

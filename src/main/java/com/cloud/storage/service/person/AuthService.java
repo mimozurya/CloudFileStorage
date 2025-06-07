@@ -1,5 +1,6 @@
-package com.cloud.storage.services.person;
+package com.cloud.storage.service.person;
 
+import com.cloud.storage.dto.ErrorResponse;
 import com.cloud.storage.dto.person.PersonRequest;
 import com.cloud.storage.dto.person.PersonResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,16 +40,15 @@ public class AuthService {
                                     session.getId(), 3600))
                     .body(new PersonResponse(person.username()));
         } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new PersonResponse("Authentication failed"));
+            throw new AuthenticationException("Authentication failed") {};
         }
     }
 
-    public ResponseEntity<PersonResponse> logout(HttpServletRequest request) {
+    public ResponseEntity<?> logout(HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new PersonResponse("No active session found"));
+                    .body(new ErrorResponse("No active session found"));
         }
 
         deleteSession(request);

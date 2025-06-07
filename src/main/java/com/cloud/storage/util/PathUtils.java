@@ -1,4 +1,4 @@
-package com.cloud.storage.utils;
+package com.cloud.storage.util;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -8,7 +8,7 @@ public class PathUtils {
         return URLDecoder.decode(encodedPath, StandardCharsets.UTF_8);
     }
 
-    public static String getFullPath(String path, Integer id) {
+    public static String getFullPathById(String path, Integer id) {
         String normalizedPath = path.replaceAll("^/+", "");
         return String.format("user-%d-files/%s", id, normalizedPath);
     }
